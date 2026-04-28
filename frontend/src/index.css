@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+    font-family: "Inter", sans-serif;
+  }
+
+  [dir="rtl"] body,
+  [dir="rtl"] {
+    font-family: "Cairo", sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 text-white px-8 py-3 text-sm tracking-widest uppercase shadow-md shadow-primary-500/30
+           hover:bg-primary-700 hover:shadow-lg transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-outline {
+    @apply border border-primary-600 text-primary-600 px-8 py-3 text-sm tracking-widest uppercase
+           hover:bg-primary-600 hover:text-white transition-all duration-300 cursor-pointer;
+  }
+
+  .input-field {
+    @apply w-full border border-primary-300 px-4 py-3 text-sm focus:outline-none
+           focus:border-primary-900 transition-colors duration-200 bg-white;
+  }
+
+  .skeleton {
+    @apply bg-gradient-to-r from-primary-100 via-primary-200 to-primary-100
+           bg-[length:200%_100%] animate-shimmer;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-bold tracking-tight text-neutral-900;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* RTL utilities */
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .space-x-4 > * + * {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-400 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-600;
+}
