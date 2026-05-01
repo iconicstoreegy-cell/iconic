@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '../services/productService';
 import ProductCard from '../components/ProductCard';
@@ -31,6 +31,16 @@ export default function Home() {
 
   const ArrowIcon = isRTL ? FiArrowLeft : FiArrowRight;
 
+  const [currentHeroImg, setCurrentHeroImg] = useState(0);
+  const heroImages = ['/hero-model.png', '/hero-model-2.png'];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroImg((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   const { data: featuredData, isLoading: loadingFeatured } = useQuery({
     queryKey: ['products', 'featured'],
     queryFn: () => getProducts({ featured: true, limit: 4 })
@@ -45,52 +55,114 @@ export default function Home() {
     <PageTransition>
 
       {/* ── BREATHTAKING HERO ── */}
-      <section ref={heroRef} className="relative h-screen min-h-[700px] flex items-center justify-center bg-neutral-50 overflow-hidden">
-        {/* Dynamic Abstract Background Elements */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-200/40 rounded-full blur-[100px] animate-float mix-blend-multiply" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-[100px] animate-pulse-slow mix-blend-multiply" />
+      <section ref={heroRef} className="relative min-h-[85vh] lg:h-screen flex items-center bg-neutral-50 overflow-hidden pt-36 pb-16 lg:pt-32 lg:pb-16">
+        {/* Soft Background Gradients */}
+        <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-white via-white/80 to-transparent z-0" />
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary-200/40 rounded-full blur-[100px] animate-float mix-blend-multiply" />
+        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-accent-500/5 rounded-full blur-[120px] pointer-events-none" />
         
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none  " />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
 
-        <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
-          initial="hidden"
-          animate="show"
-          variants={stagger}
-          className="relative text-center px-4 max-w-5xl mx-auto z-10 pt-20"
-        >
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-neutral-200/50 shadow-sm mb-8">
-            <span className="w-2 h-2 rounded-full bg-accent-500 animate-pulse" />
-            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-primary-950">
-              {isRTL ? 'إطلاق مجموعة الصيف' : 'Summer Drop Live'}
-            </span>
-          </motion.div>
+        <div className="container-custom relative z-10 w-full">
+          <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
+            
+            {/* Left Content: Text & CTAs */}
+            <motion.div
+              style={{ y: heroY, opacity: heroOpacity }}
+              initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className={`flex-1 flex flex-col justify-center text-center lg:text-start ${isRTL ? 'lg:text-right' : 'lg:text-left'} z-10 w-full`}
+            >
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-neutral-200/50 shadow-sm mb-6 w-max mx-auto ${isRTL ? 'lg:ml-auto lg:mr-0' : 'lg:mr-auto lg:ml-0'}`}
+              >
+                <span className="w-2 h-2 rounded-full bg-accent-500 animate-pulse" />
+                <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-primary-950">
+                  {isRTL ? 'إطلاق مجموعة الصيف' : 'Summer Drop Live'}
+                </span>
+              </motion.div>
 
-          <motion.h1
-            variants={fadeUp}
-            className="font-display text-5xl sm:text-7xl lg:text-[6.5rem] font-semibold leading-[1.05] tracking-tight text-primary-950 mb-8"
-          >
-            {t('home.hero_title')}
-          </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold leading-[1.05] tracking-tight text-primary-950 mb-6"
+              >
+                {t('home.hero_title') || 'Wear Your Story'}
+              </motion.h1>
 
-          <motion.p
-            variants={fadeUp}
-            className="text-neutral-500 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed font-light"
-          >
-            {t('home.hero_subtitle')}
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-neutral-500 text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light"
+              >
+                {t('home.hero_subtitle') || 'Discover premium collections crafted for elegance and minimal lifestyle.'}
+              </motion.p>
 
-          <motion.div variants={fadeUp} className="flex items-center justify-center gap-5 flex-wrap">
-            <Link to="/shop" className="btn-primary group flex items-center gap-2">
-              {t('home.hero_cta')} 
-              <ArrowIcon size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link to="/shop?newCollection=true" className="btn-outline flex items-center gap-2 bg-white/50 backdrop-blur-sm">
-              <FiPlay size={16} /> {t('home.new_collection')}
-            </Link>
-          </motion.div>
-        </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className={`flex items-center justify-center lg:justify-start gap-4 flex-wrap`}
+              >
+                <Link to="/shop" className="btn-primary group flex items-center gap-2 shadow-lg shadow-primary-950/20 hover:shadow-xl hover:shadow-primary-950/30 transition-all hover:-translate-y-1">
+                  {t('home.hero_cta')} 
+                  <ArrowIcon size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link to="/shop?newCollection=true" className="btn-outline flex items-center gap-2 bg-transparent hover:bg-neutral-50 hover:-translate-y-1 transition-all">
+                  <FiPlay size={16} /> {t('home.new_collection')}
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Content: Premium Image */}
+            <motion.div
+              style={{ y: heroY }}
+              initial={{ opacity: 0, scale: 0.95, x: isRTL ? -50 : 50 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="flex-1 w-full max-w-lg lg:max-w-none mx-auto relative"
+            >
+              <div className="relative aspect-[3/4] lg:aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl group bg-neutral-200">
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/30 via-neutral-900/5 to-transparent z-10 opacity-80 group-hover:opacity-50 transition-opacity duration-500" />
+                <AnimatePresence>
+                  <motion.img
+                    key={currentHeroImg}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1, ease: 'easeInOut' }}
+                    src={heroImages[currentHeroImg]}
+                    alt="Premium Fashion Model"
+                    className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-[3s]"
+                  />
+                </AnimatePresence>
+                
+                {/* Floating Glass Badge on Image */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className={`absolute bottom-8 ${isRTL ? 'left-8' : 'right-8'} z-20 glass-dark p-4 rounded-2xl hidden sm:flex items-center gap-4`}
+                >
+                  <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-md">
+                    <span className="text-white font-bold">New</span>
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm">Spring '26</p>
+                    <p className="text-white/70 text-xs">Collection</p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
       </section>
 
       {/* ── SLEEK MARQUEE STRIP ── */}

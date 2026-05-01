@@ -60,8 +60,8 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-4 left-4 right-4 md:top-6 md:left-12 md:right-12 z-50 transition-all duration-500 rounded-full ${
-          scrolled ? 'glass py-1' : 'bg-transparent py-2'
+        className={`fixed top-4 left-4 right-4 md:top-6 md:left-12 md:right-12 z-50 transition-all duration-500 rounded-full border ${
+          scrolled ? 'bg-white/90 backdrop-blur-xl border-white/20 shadow-md py-1' : 'bg-white/70 backdrop-blur-md border-white/30 shadow-soft py-2'
         }`}
       >
         <div className="px-6 md:px-10">
