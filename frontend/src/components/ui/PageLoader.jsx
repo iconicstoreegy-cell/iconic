@@ -13,7 +13,7 @@ export default function PageLoader() {
           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
           className="w-8 h-8 border-2 border-primary-200 border-t-primary-950 rounded-full mx-auto mb-4"
         />
-        <p className="font-display text-lg tracking-widest text-primary-950">AL-SHAER</p>
+        <p className="font-display text-lg tracking-widest text-primary-950">Iconic</p>
       </motion.div>
     </div>
   );

@@ -112,7 +112,7 @@ export default function Login() {
             >
               <div className="text-center mb-8">
                 <h1 className="font-display text-3xl font-bold mb-1">{t('auth.login_title')}</h1>
-                <p className="text-primary-500 text-sm">TreVero</p>
+                <p className="text-primary-500 text-sm">Iconic</p>
               </div>
 
               {location.state?.from && (

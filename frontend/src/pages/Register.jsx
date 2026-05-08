@@ -116,7 +116,7 @@ export default function Register() {
             >
               <div className="text-center mb-8">
                 <h1 className="font-display text-3xl font-bold mb-1">{t('auth.register_title')}</h1>
-                <p className="text-primary-500 text-sm">TreVero</p>
+                <p className="text-primary-500 text-sm">Iconic</p>
               </div>
 
               <form onSubmit={handleSubmit((d) => registerMutation.mutate(d))} className="space-y-4">

@@ -32,7 +32,7 @@ export default function Home() {
   const ArrowIcon = isRTL ? FiArrowLeft : FiArrowRight;
 
   const [currentHeroImg, setCurrentHeroImg] = useState(0);
-  const heroImages = ['/hero-model.png', '/hero-model-2.png'];
+  const heroImages = ['/blackjacketimg4.jpg','/water_proof_vest_mint_img1.jpg','/hero-model-2.png'];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -294,7 +294,7 @@ export default function Home() {
             >
               <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl">
                 <img
-                  src="TreVero.png?text=Our+Story"
+                  src="iconic.png?text=Our+Story"
                   alt="Brand Story"
                   className="w-full h-full object-cover"
                   loading="lazy"

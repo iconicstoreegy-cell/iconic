@@ -13,8 +13,8 @@ async function createAdmin() {
 
   await User.create({
     name: 'Admin',
-    email: 'admin@alshaer.com',
-    password: 'Admin@1234',
+    email: 'iconic.store.egy@gmail.com',
+    password: 'Iconic@2026@1234',
     role: 'admin'
   });
 

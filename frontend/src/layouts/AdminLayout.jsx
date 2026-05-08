@@ -36,7 +36,7 @@ export default function AdminLayout() {
   const Sidebar = () => (
     <aside className={`w-64 bg-primary-950 text-white flex flex-col h-full`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="p-6 border-b border-primary-800">
-        <h1 className="font-display text-xl font-bold tracking-widest">TreVero</h1>
+        <h1 className="font-display text-xl font-bold tracking-widest">Iconic</h1>
         <p className="text-primary-400 text-xs mt-1 tracking-wider">
           {isRTL ? 'لوحة الإدارة' : 'ADMIN PANEL'}
         </p>

@@ -71,7 +71,7 @@ export default function Navbar() {
             <Link to="/" className="flex-shrink-0 flex items-center gap-2">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
                 <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-primary-950">
-                  TreVero<span className="text-accent-500">.</span>
+                  Iconic<span className="text-accent-500">.</span>
                 </span>
               </motion.div>
             </Link>

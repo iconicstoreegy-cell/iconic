@@ -44,7 +44,7 @@ export default function ProductCard({ product }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              src={product.images?.[imgIdx] || 'https://placehold.co/400x533/f4f4f5/a1a1aa?text=TreVero'}
+              src={product.images?.[imgIdx] || 'https://placehold.co/400x533/f4f4f5/a1a1aa?text=Iconic'}
               alt={name}
               className="w-full h-full object-cover"
               loading="lazy"

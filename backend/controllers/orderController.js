@@ -34,7 +34,7 @@ const createOrder = asyncHandler(async (req, res) => {
   });
 
   const order = await Order.create({
-    user: req.user._id,
+    user: req.user ? req.user._id : undefined,
     customerInfo,
     orderItems: sanitizedItems,
     totalPrice: Number(totalPrice),
@@ -80,11 +80,16 @@ const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate('user', 'name email');
   if (!order) { res.status(404); throw new Error('Order not found'); }
 
-  const isOwner = order.user?._id?.toString() === req.user._id.toString()
-    || order.user?.toString() === req.user._id.toString();
+  const isOwner = req.user && (
+    order.user?._id?.toString() === req.user._id.toString() || 
+    order.user?.toString() === req.user._id.toString()
+  );
 
-  if (req.user.role !== 'admin' && !isOwner) {
-    res.status(403); throw new Error('Not authorized');
+  // If order has a user, restrict access. If no user (guest), allow read access via ID
+  if (order.user) {
+    if (!req.user || (req.user.role !== 'admin' && !isOwner)) {
+      res.status(403); throw new Error('Not authorized');
+    }
   }
 
   res.json(order);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +15,7 @@ import { FiUpload, FiX, FiCheckCircle, FiTruck, FiSmartphone } from 'react-icons
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),
+  email: z.string().email('Valid email required'),
   phone: z.string().min(10, 'Valid phone required'),
   address: z.string().min(5, 'Address is required'),
   city: z.string().min(2, 'City is required'),
@@ -82,6 +83,7 @@ export default function Checkout() {
     resolver: zodResolver(schema),
     defaultValues: {
       name: user?.name || '',
+      email: user?.email || '',
       phone: user?.phone || ''
     }
   });
@@ -129,7 +131,7 @@ export default function Checkout() {
       }
 
       const order = await createOrder({
-        customerInfo: { ...data, email: user?.email },
+        customerInfo: { ...data },
         orderItems: cartItems.map((i) => ({
           product: i._id,
           name: i.name,
@@ -161,38 +163,58 @@ export default function Checkout() {
 
           <div className="grid lg:grid-cols-3 gap-10">
             {/* Left: Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6">
+              {!user && (
+                <div className="bg-primary-50 border border-primary-100 rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-sm font-semibold text-primary-950">Checkout as a Guest</h3>
+                    <p className="text-xs text-primary-500 mt-1">Already have an account? Login for faster checkout.</p>
+                  </div>
+                  <Link to="/login?redirect=/checkout" className="btn-primary text-xs px-5 py-2.5 whitespace-nowrap">
+                    Login
+                  </Link>
+                </div>
+              )}
 
-              {/* Delivery Info */}
-              <div className="bg-white border border-primary-100 rounded-xl p-6 space-y-4">
-                <h2 className="text-xs font-semibold tracking-widest uppercase text-primary-500">Delivery Information</h2>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.name')}</label>
-                    <input {...register('name')} className="input-field" />
-                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+
+                {/* Delivery Info */}
+                <div className="bg-white border border-primary-100 rounded-xl p-6 space-y-4">
+                  <h2 className="text-xs font-semibold tracking-widest uppercase text-primary-500">Delivery Information</h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.name')}</label>
+                      <input {...register('name')} className="input-field" />
+                      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-xs tracking-widest uppercase mb-2">Email Address</label>
+                      <input {...register('email')} type="email" className="input-field" />
+                      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                    </div>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.phone')}</label>
+                      <input {...register('phone')} className="input-field" />
+                      {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                    </div>
+                    <div>
+                      <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.city')}</label>
+                      <input {...register('city')} className="input-field" />
+                      {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
+                    </div>
                   </div>
                   <div>
-                    <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.phone')}</label>
-                    <input {...register('phone')} className="input-field" />
-                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                    <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.address')}</label>
+                    <input {...register('address')} className="input-field" />
+                    {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>}
+                  </div>
+                  <div>
+                    <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.notes')}</label>
+                    <textarea {...register('notes')} rows={2} className="input-field resize-none" placeholder="Any special instructions..." />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.address')}</label>
-                  <input {...register('address')} className="input-field" />
-                  {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>}
-                </div>
-                <div>
-                  <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.city')}</label>
-                  <input {...register('city')} className="input-field" />
-                  {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
-                </div>
-                <div>
-                  <label className="block text-xs tracking-widest uppercase mb-2">{t('checkout.notes')}</label>
-                  <textarea {...register('notes')} rows={2} className="input-field resize-none" placeholder="Any special instructions..." />
-                </div>
-              </div>
 
               {/* Payment Method */}
               <div className="bg-white border border-primary-100 rounded-xl p-6 space-y-4">
@@ -300,7 +322,8 @@ export default function Checkout() {
                   {uploading ? 'Uploading receipt...' : 'Placing order...'}</>
                 ) : t('checkout.place_order')}
               </motion.button>
-            </form>
+              </form>
+            </div>
 
             {/* Right: Order Summary */}
             <div className="lg:col-span-1">
@@ -332,7 +355,7 @@ export default function Checkout() {
                   </div>
                   <div className="flex justify-between text-sm text-primary-500">
                     <span>Shipping</span>
-                    <span className="text-emerald-600">Free</span>
+                    <span className="text-emerald-600">{t('common.free')}</span>
                   </div>
                   <div className="flex justify-between font-bold text-primary-950 pt-2 border-t border-primary-100">
                     <span>{t('cart.total')}</span>

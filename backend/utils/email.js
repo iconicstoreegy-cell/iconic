@@ -12,14 +12,14 @@ const transporter = nodemailer.createTransport({
 const sendOTPEmail = async (email, name, otp) => {
   try {
     await transporter.sendMail({
-      from: `"TreVero" <${process.env.EMAIL_USER}>`,
+      from: `"Iconic" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: 'Verify your email — TreVero',
+      subject: 'Verify your email — Iconic',
       html: `
         <div style="font-family: 'Helvetica Neue', sans-serif; max-width: 480px; margin: 0 auto; background: #fff; border: 1px solid #e5e5e5;">
           <div style="background: #0a0a0a; padding: 32px; text-align: center;">
-            <h1 style="color: #fff; font-size: 22px; letter-spacing: 6px; margin: 0;">TreVero</h1>
-            <p style="color: #737373; font-size: 11px; letter-spacing: 3px; margin: 6px 0 0;">نريفيرو</p>
+            <h1 style="color: #fff; font-size: 22px; letter-spacing: 6px; margin: 0;">Iconic</h1>
+            <p style="color: #737373; font-size: 11px; letter-spacing: 3px; margin: 6px 0 0;">ايقونه</p>
           </div>
           <div style="padding: 40px 32px;">
             <p style="color: #171717; font-size: 16px; margin: 0 0 8px;">Hello, ${name}</p>
@@ -30,7 +30,7 @@ const sendOTPEmail = async (email, name, otp) => {
             <p style="color: #737373; font-size: 12px; margin: 0;">This code expires in <strong>10 minutes</strong>. If you didn't request this, ignore this email.</p>
           </div>
           <div style="background: #f5f5f5; padding: 16px 32px; text-align: center;">
-            <p style="color: #a3a3a3; font-size: 11px; margin: 0;">© ${new Date().getFullYear()} TreVero. All rights reserved.</p>
+            <p style="color: #a3a3a3; font-size: 11px; margin: 0;">© ${new Date().getFullYear()} Iconic. All rights reserved.</p>
           </div>
         </div>
       `
@@ -67,14 +67,14 @@ const sendOrderEmail = async (order) => {
       : '';
 
     await transporter.sendMail({
-      from: `"TreVero" <${process.env.EMAIL_USER}>`,
+      from: `"Iconic" <${process.env.EMAIL_USER}>`,
       to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
-      subject: `🛍️ New Order #${order._id.toString().slice(-8).toUpperCase()} — TreVero`,
+      subject: `🛍️ New Order #${order._id.toString().slice(-8).toUpperCase()} — Iconic`,
       html: `
         <div style="font-family: 'Helvetica Neue', sans-serif; max-width: 600px; margin: 0 auto; background: #fff; border: 1px solid #e5e5e5;">
           <div style="background: #0a0a0a; padding: 32px; text-align: center;">
             <h1 style="color: #fff; font-size: 22px; letter-spacing: 6px; margin: 0;">NEW ORDER</h1>
-            <p style="color: #737373; font-size: 12px; margin: 6px 0 0;">TreVero</p>
+            <p style="color: #737373; font-size: 12px; margin: 6px 0 0;">Iconic</p>
           </div>
           <div style="padding: 32px;">
             <p style="font-size: 13px; color: #737373; margin: 0 0 4px;">Order ID</p>
