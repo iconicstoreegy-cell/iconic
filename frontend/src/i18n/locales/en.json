@@ -8,7 +8,13 @@
     "logout": "Logout",
     "profile": "Profile",
     "admin": "Dashboard",
-    "search": "Search"
+    "search": "Search",
+    "Hoodies": "Hoodies",
+    "T-Shirts": "T-Shirts",
+    "Shirts": "Shirts",
+    "Pants": "Pants",
+    "Polo-Shirts": "Polo Shirts"
+
   },
   "home": {
     "hero_title": "Wear Your Story",
@@ -122,7 +128,14 @@
     "quick_links": "Quick Links",
     "contact": "Contact",
     "follow": "Follow Us",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "categories": "Categories",
+    "hoodies": "Hoodies",
+    "T-Shirts": "T-Shirts",
+    "Shirts": "Shirts",
+    "Pants": "Pants",
+    "Polo-Shirts": "Polo Shirts",
+    "Egypt": "Egypt"
   },
   "order": {
     "status_pending": "Pending",

@@ -10,10 +10,11 @@ import PageTransition from '../components/ui/PageTransition';
 import { FiArrowRight, FiArrowLeft, FiPlay } from 'react-icons/fi';
 
 const CATEGORIES = [
-  { en: 'Hoodies',  ar: 'هوديز',     img: 'https://wearthepeace.com/cdn/shop/products/human-embroidered-hoodie-wear-the-peace-585045_1445x.jpg?v=1694209411' },
-  { en: 'T-Shirts', ar: 'تيشيرتات', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj9dEFMDZG32etPpUbUgtYzTEQGByJQbbPug&s' },
-  { en: 'Jackets',  ar: 'جاكيتات',  img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5sm2BSyMiZO39Cl2YoMsVcq-nZlblVg9f4g&s' },
-  { en: 'Pants',    ar: 'بناطيل',   img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjufOLO5420yL7Wu_PWB5ij3Qv00HVMMVy_Q&s' }
+  { en: 'Hoodies',  ar: 'هوديز',     img: 'hoodies.png' },
+  { en: 'T-Shirts', ar: 'تيشيرتات', img: 'T-shirts.png' },
+  { en: 'Shirts',  ar: 'قمصان',  img: 'shirts.png' },
+  { en: 'Pants',    ar: 'بناطيل',   img: 'pants.png' },
+  {en:'Polo-Shirts', ar:'شيرت بولو', img:'polo-shirts.png'}
 ];
 
 const fadeUp = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } } };
@@ -172,7 +173,7 @@ export default function Home() {
           transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
           className="flex gap-16 whitespace-nowrap items-center"
         >
-          {Array(8).fill(['NEW COLLECTION', 'HANDMADE IN EGYPT', 'PREMIUM QUALITY', 'LIMITED DROPS']).flat().map((text, i) => (
+          {Array(8).fill(['NEW COLLECTION','PREMIUM QUALITY', 'LIMITED DROPS','Perfect Design']).flat().map((text, i) => (
             <span key={i} className="text-[13px] font-semibold tracking-[0.3em] uppercase text-white/50 flex-shrink-0 flex items-center gap-16">
               {text} <span className="text-accent-500/50 w-2 h-2 rounded-full" />
             </span>
@@ -294,7 +295,7 @@ export default function Home() {
             >
               <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] shadow-2xl">
                 <img
-                  src="iconic.png?text=Our+Story"
+                  src="iconic_logo.png?text=Our+Story"
                   alt="Brand Story"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -334,8 +335,8 @@ export default function Home() {
 
               <div className="grid grid-cols-3 gap-8 py-8 border-y border-neutral-100">
                 {[
-                  { num: '100%', label: isRTL ? 'هاند ميد' : 'Handmade' },
-                  { num: '50+',  label: isRTL ? 'تصميم' : 'Designs' },
+                 
+                  { num: '100+',  label: isRTL ? 'تصميم' : 'Designs' },
                   { num: '4.9',  label: isRTL ? 'تقييم' : 'Rating', icon: '★' }
                 ].map(({ num, label, icon }) => (
                   <div key={label} className="text-center">

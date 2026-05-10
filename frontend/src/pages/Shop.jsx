@@ -11,7 +11,7 @@ import { FiFilter, FiX } from 'react-icons/fi';
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const COLORS = ['Black', 'White', 'Grey', 'Navy', 'Beige', 'Brown'];
-const CATEGORIES = ['Hoodies', 'T-Shirts', 'Jackets', 'Pants', 'Accessories'];
+const CATEGORIES = ['Hoodies', 'T-Shirts', 'Pants', 'Polo-Shirts', 'Shirts', 'Jackets'];
 
 export default function Shop() {
   const { t } = useTranslation();

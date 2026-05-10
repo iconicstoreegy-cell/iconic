@@ -53,6 +53,13 @@ export default function Navbar() {
     { to: '/', label: t('nav.home'), end: true },
     { to: '/shop', label: t('nav.shop') }
   ];
+  const categoryLinks = [
+  { to: '/shop?category=Hoodies', label: t('nav.Hoodies') },
+  { to: '/shop?category=T-Shirts', label: t('nav.T-Shirts') },
+  { to: '/shop?category=Shirts', label: t('nav.Shirts') },
+  { to: '/shop?category=Pants', label: t('nav.Pants') },
+  { to: '/shop?category=Polo-Shirts', label: t('nav.Polo-Shirts') },
+];
 
   return (
     <>
@@ -228,7 +235,7 @@ export default function Navbar() {
             exit={{ opacity: 0, scale: 0.95 }}
             className="fixed inset-0 z-30 flex items-center justify-center bg-white/95 backdrop-blur-xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center gap-8 text-center p-8 w-full">
+            <div className="flex flex-col items-center justify-center gap-8 text-center p-8 w-full mt-16">
               {navLinks.map(({ to, label }) => (
                 <Link
                   key={to}
@@ -238,7 +245,15 @@ export default function Navbar() {
                   {label}
                 </Link>
               ))}
-              
+              {categoryLinks.map(({ to, label }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="text-lg font-medium text-neutral-500 hover:text-accent-500 transition-colors"
+                >
+                  {label}
+                </Link>
+              ))}
               <div className="w-16 h-px bg-neutral-200 my-4" />
               
               {user ? (

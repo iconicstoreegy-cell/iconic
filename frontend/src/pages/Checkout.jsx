@@ -45,7 +45,7 @@ const PAYMENT_METHODS = [
     color: 'blue',
     accountInfo: {
       label: 'InstaPay Account',
-      value: import.meta.env.VITE_INSTAPAY_ACCOUNT || '01XXXXXXXXX'
+      value: '01500543388' 
     }
   },
   {
@@ -59,7 +59,7 @@ const PAYMENT_METHODS = [
     color: 'red',
     accountInfo: {
       label: 'Vodafone Cash Number',
-      value: import.meta.env.VITE_VODAFONE_CASH_NUMBER || '01XXXXXXXXX'
+      value: '01500543388'
     }
   }
 ];

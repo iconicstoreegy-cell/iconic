@@ -22,14 +22,14 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-accent-500/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container-custom relative pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12  lg:grid-cols-12 lg:gap-8 mb-16">
           
           {/* Brand */}
-          <div className="md:col-span-5 lg:col-span-4">
+          <div className="md:col-span-2 lg:col-span-3">
             <h2 className="font-display text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-1">
               Iconic<span className="text-accent-500">.</span>
             </h2>
-            <p className="font-arabic text-lg text-neutral-500 mb-6">أيقونة</p>
+          
             <p className="text-sm leading-relaxed text-neutral-400 max-w-sm mb-8">
               {t('footer.tagline')}
             </p>
@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="md:col-span-3 lg:col-span-2 lg:col-start-7">
+          <div className="md:col-span-3 lg:col-span-2 ">
             <h3 className="text-white text-xs font-semibold tracking-widest uppercase mb-6">{t('footer.quick_links')}</h3>
             <ul className="space-y-4 text-sm font-medium">
               {[
@@ -69,7 +69,19 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
+           <div className="md:col-span-2 lg:col-span-3">
+                  <h3 className="text-white text-xs font-semibold tracking-widest uppercase mb-6">{t('footer.categories')}</h3>
+                  <ul className="space-y-4 text-sm font-medium text-neutral-400">
+                    {['Hoodies', 'T-Shirts', 'Shirts', 'Pants', 'Polo-Shirts'].map((cat) => (
+                      <li key={cat}>
+                        <Link to={`/shop?category=${encodeURIComponent(cat)}`} className="hover:text-white transition-colors flex items-center gap-2 group">
+                          {t(`nav.${cat}`)}
+                          <FiArrowUpRight className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" size={14} />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+              </div>
           {/* Contact */}
           <div className="md:col-span-4 lg:col-span-3">
             <h3 className="text-white text-xs font-semibold tracking-widest uppercase mb-6">{t('footer.contact')}</h3>
@@ -82,12 +94,16 @@ export default function Footer() {
               </li>
               <li>
                 <a href="tel:+201012704648" className="hover:text-white transition-colors">
-                  01027252707
+                  01500543388
                 </a>
               </li>
-              <li>Assiut, Egypt</li>
+              <li>Egypt</li>
             </ul>
+            
           </div>
+          {/*items*/}
+      
+
         </div>
 
         {/* Bottom Bar */}
